@@ -34,7 +34,53 @@
         <!-- books -->
           <div class="container">
             <div class="row">
-                <h1>Book Data</h1>
+              {%comment%}
+                <table class="table table-bordered">
+                  <thead>
+                    <th>Sr.No</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Categoery</th>
+                    <th>Price</th>
+                    <th>Qty</th>
+                    <th>DOP</th>
+                    <th>Photo</th>
+                  </thead>
+                  <tbody>
+                    {% for x in allbooks %}
+                    <tr>
+                      <td>{{forloop.counter}}</td>
+                      <td>{{x.title}}</td>
+                      <td>{{x.author}}</td>
+                      <td>{{x.category}}</td>
+                      <td>{{x.price}}</td>
+                      <td>{{x.qut}}</td>
+                      <td>{{x.dop}}</td>
+                      <td>
+                        <img src="{{x.photo.url}}" alt="{{x.title}}" width="200" height="200">
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+              {%endcomment%}
+
+             
+                {% for x in allbooks %}
+                <div class="col-md-3">
+                <div class="card" style="width: 20rem;">
+                  <img src="{{x.photo.url}}" class="card-img-top" alt="{{x.title}}">
+                  <div class="card-body">
+                    <h5 class="card-title">{{x.title}}</h5>
+                    <p class="card-text">Author:{{x.author}}</p>
+                    <p class="card-text">Price:{{x.price}}</p>
+                    <a href="#" class="btn btn-primary">view more</a>
+                  </div>
+                </div>
+                </div>
+
+                {% endfor %}
+              
             </div>
         </div>
         <!-- fixed image -->

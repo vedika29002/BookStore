@@ -3,12 +3,23 @@ from .models import Books
 
 # Create your views here.
 def index(req):
-    allbooks=Books.object.all()
+    allbooks=Books.objects.all()
     print(allbooks)
-    return render(req, "index.html")
+    #b=Books.objects.create(bookid=127,title='MOngoDB',author='james',category='database',price=6523,qut=5,dop='2000-02-23',photo=None)
+    #b.save()
 
-def index(req):
-    return render(req, "index.html")
+    #b=Books.objects.get(bookid=103)
+    #b.author='andirv' 
+    #b.save
+
+    #b=Books.objects.filter(bookid=102).first()
+    #b.author='jeni'
+    #b.save()
+
+    context={'allbooks':allbooks}
+
+
+    return render(req, "index.html",context)
 
 
 def signup(req):
