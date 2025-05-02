@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Bookstore{% endblock %}
+{% block body %}
+<div class="container-fluid">
+    <div class="row">
+        <!--carousal-->
+        <div class="container">
+            <div class="row">
+                <div id="carouselExampleInterval" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                      <div class="carousel-item active" data-bs-interval="3000">
+                        <img src="{% static 'images/banner1.png' %}" class="d-block w-100" alt="..." width="400" height="400">
+                      </div>
+                      <div class="carousel-item" data-bs-interval="3000">
+                        <img src="{% static 'images/banner2.png' %}" class="d-block w-100" alt="..." width="400" height="400">
+                      </div>
+                      <div class="carousel-item" data-bs-interval="3000">
+                        <img src="{% static 'images/banner3.png' %}" class="d-block w-100" alt="..." width="400" height="400">
+                      </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="prev">
+                      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleInterval" data-bs-slide="next">
+                      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                      <span class="visually-hidden">Next</span>
+                    </button>
+                  </div>
+            </div>
+        </div>
+       
+        <!-- books -->
+          <div class="container">
+            <div class="row">
+                <h1>Book Data</h1>
+            </div>
+        </div>
+        <!-- fixed image -->
+         <div class="container">
+            <div class="row">
+                <div class="col">
+                    <img src="{%static 'images/images1.png'%}" alt="" width="300">
+                </div>
+                <div class="col">
+                    <img src="{%static 'images/images2.png'%}" alt="" width="300">
+                </div>
+                <div class="col">
+                    <img src="{%static 'images/images3.png'%}" alt="" width="300">
+                </div>
+
+            </div>
+         </div>
+
+    </div> 
+</div>
+{% endblock %}
