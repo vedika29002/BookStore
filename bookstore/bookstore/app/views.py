@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from .models import Books
 
 # Create your views here.
@@ -45,7 +45,7 @@ def signup(req):
             messages.error(req,"Password and Confirm Password doesn't mach. Try again")
             return render(req,'signup.html')
         elif uname==upass:
-            messages.error(req,"Username and password be different.")
+            messages.error(req,"Username and password must be different.")
             return render(req,'signup.html')
         elif uname in user:
             messages.error(req,"Username alredy exists. try again")
@@ -54,7 +54,7 @@ def signup(req):
             messages.error(req,"Email alredy exists. try again")
             return render(req, "signup.html")
         newuser=User.objects.create(username=uname, email=uemail,password=upass)
-        newuser.set_password()
+        newuser.set_password(upass)
         newuser.save()
         print(User.objects.all())
         
@@ -63,8 +63,41 @@ def signup(req):
     else:
         print(req.method)
         return render(req, "signup.html")
+    
+from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.hashers import check_password
 def signin(req):
-    return render(req, "signin.html")
+    if req.method=="POST":
+        uname=req.POST.get("uname")
+        uemail=req.POST.get("uemail")
+        upass=req.POST.get("upass")
+        print(uname,uemail,upass)
+        #userdata=User.objects.filter(username=uemail,password=upass)
+        #userdata=authenticate(username=uname,password=upass)
+        #print(userdata)
+        chkmail=User.objects.get(email=uemail)
+        print(chkmail)
+        try:
+            if chkmail.check_password(upass):
+                login(req, chkmail)
+                return render(req,'dashboard.html')
+            else:
+                messages.error(req,'Invalid email or password')
+                return render(req,'signin.html')
+        except User.DoesNotExist:
+            messages.error(req, 'user not exists')  
+            return render(req,'signin.html') 
+    
+    else:
+        return render(req, "signin.html")
+
+
+def dashboard(req):
+    return render(req, "dashboard.html")
+
+def userlogout(req):
+    logout(req)
+    return redirect("/")
 def about(req):
     return render(req, "about.html")
 

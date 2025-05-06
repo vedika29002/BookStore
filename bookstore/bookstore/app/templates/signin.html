@@ -12,13 +12,38 @@
               </symbol>
         </svg>
         <div class="alert alert-success d-flex align-items-center" role="alert">
-            <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+            <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:" width="20" height="20"><use xlink:href="#check-circle-fill"/></svg>
             <div>
-              An example success alert with an icon
+              {{m}}
             </div>
           </div>
-       
     </div>
     {% endfor %}
+
+    <form method="post">
+      {% csrf_token %}
+      {% comment %}
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Username</label>
+        <input type="text" name="uname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text" required>We'll never share your email with anyone else.</div>
+      </div>
+      {% endcomment %}
+      <div class="mb-3">
+        <label for="exampleInputEmail1" class="form-label">Email address</label>
+        <input type="email" name="uemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        <div id="emailHelp" class="form-text" required>We'll never share your email with anyone else.</div>
+      </div>
+      <div class="mb-3">
+        <label for="exampleInputPassword1" class="form-label" name="upass">Password</label>
+        <input type="password" name="upass" class="form-control" id="exampleInputPassword1" required>
+      </div>
+      <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1" required>Check me out</label>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit</button>
+      <a href="/" class="btn btn-danger">Cancel</a>
+    </form>
 </div>
 {% endblock %}
