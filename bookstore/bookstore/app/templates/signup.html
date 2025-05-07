@@ -1,60 +1,58 @@
 {% extends 'base.html' %}
-{% block title %}Bookstore|SignUP{% endblock %}
+{% block title %}Bookstore | Sign Up{% endblock %}
+
 {% block body %}
-<div class="container">
-    <h1 class="text-center">SignUP</h1>
-    {% comment %}
-    {% if errmsg %}
-    <h1><mark>{{errmsg}}</mark></h1>
-    {%     endif %}
-    {% endcomment %}
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+  <div class="col-md-6">
+    <div class="card shadow-lg p-4">
+      <h2 class="text-center mb-4">📝 Create Account</h2>
 
-    {% for m in messages %}
-    <div class="alert">
-        <svg xmlns="http://www.w3.org/2000/svg" class="d-none" >
-            <symbol id="exclamation-triangle-fill" viewBox="0 0 16 16">
-            <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
-          </symbol>
-        </svg>
-        <div class="alert alert-danger d-flex align-items-center" role="alert">
-            <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Danger:" width="20" height="20"><use xlink:href="#exclamation-triangle-fill"/></svg>
-            <div>
-              {{m}}
-            </div>
-          </div>
-       
-    </div>
-    {% endfor %}
+      {% for m in messages %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        <strong>Error:</strong> {{ m }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
 
-
-    <form method="post">
-    {% csrf_token %}
-    <form>
+      <form method="post" novalidate>
+        {% csrf_token %}
         <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Username</label>
-            <input type="text" name="uname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
-            <div id="emailHelp" class="form-text">We'll never share your Username with anyone else.</div>
-          </div>
-        <div class="mb-3">
-          <label for="exampleInputEmail1" class="form-label">Email address</label>
-          <input type="email" name="uemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
-          <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+          <label for="username" class="form-label">Username</label>
+          <input type="text" name="uname" class="form-control" id="username" required>
+          <div class="form-text">Choose a unique username.</div>
         </div>
+
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label">Password</label>
-          <input type="password" name="upass" class="form-control" id="exampleInputPassword1" required>
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" name="uemail" class="form-control" id="email" required>
+          <div class="form-text">We'll never share your email with anyone else.</div>
         </div>
+
         <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Confirm Password</label>
-            <input type="password" name="ucpass" class="form-control" id="exampleInputPassword1" required>
-          </div>
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="upass" class="form-control" id="password" required>
+        </div>
+
+        <div class="mb-3">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <input type="password" name="ucpass" class="form-control" id="confirmPassword" required>
+        </div>
+
         <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
-          <label class="form-check-label" for="exampleCheck1">Check me out</label>
+          <input type="checkbox" class="form-check-input" id="termsCheck" required>
+          <label class="form-check-label" for="termsCheck">I agree to the terms and conditions</label>
         </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <a href="/" class="btn btn-danger">Cancel</a>
+
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary">Sign Up</button>
+          <a href="/" class="btn btn-outline-secondary">Cancel</a>
+        </div>
       </form>
-    </form>
+
+      <div class="text-center mt-3">
+        <small>Already have an account? <a href="{% url 'signin' %}">Sign In</a></small>
+      </div>
+    </div>
+  </div>
 </div>
 {% endblock %}

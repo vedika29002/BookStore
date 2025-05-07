@@ -1,49 +1,44 @@
 {% extends 'base.html' %}
-{% block title %}Bookstore|SignIN{% endblock %}
+{% block title %}Bookstore | Sign In{% endblock %}
+
 {% block body %}
-<div class="container">
-    <h1 class="text-center">SignIN</h1>
+<div class="container d-flex align-items-center justify-content-center min-vh-100">
+  <div class="col-md-6">
+    <div class="card shadow-lg p-4">
+      <h2 class="text-center mb-4">🔐 Sign In</h2>
 
-    {% for m in messages %}
-    <div class="alert">
-        <svg xmlns="http://www.w3.org/2000/svg" class="d-none" >
-            <symbol id="check-circle-fill" viewBox="0 0 16 16">
-                <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
-              </symbol>
-        </svg>
-        <div class="alert alert-success d-flex align-items-center" role="alert">
-            <svg class="bi flex-shrink-0 me-2" role="img" aria-label="Success:" width="20" height="20"><use xlink:href="#check-circle-fill"/></svg>
-            <div>
-              {{m}}
-            </div>
-          </div>
+      {% for m in messages %}
+      <div class="alert alert-success alert-dismissible fade show" role="alert">
+        <strong>Success!</strong> {{ m }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+
+      <form method="post" novalidate>
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="email" class="form-label">Email address</label>
+          <input type="email" name="uemail" class="form-control" id="email" required>
+          <div class="form-text">We'll never share your email with anyone else.</div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input type="password" name="upass" class="form-control" id="password" required>
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="check" required>
+          <label class="form-check-label" for="check">Remember me</label>
+        </div>
+        <div class="d-grid gap-2">
+          <button type="submit" class="btn btn-primary">Login</button>
+          <a href="/" class="btn btn-outline-secondary">Cancel</a>
+        </div>
+      </form>
+
+      <div class="text-center mt-3">
+        <small>Don't have an account? <a href="{% url 'signup' %}">Sign Up</a></small>
+      </div>
     </div>
-    {% endfor %}
-
-    <form method="post">
-      {% csrf_token %}
-      {% comment %}
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Username</label>
-        <input type="text" name="uname" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text" required>We'll never share your email with anyone else.</div>
-      </div>
-      {% endcomment %}
-      <div class="mb-3">
-        <label for="exampleInputEmail1" class="form-label">Email address</label>
-        <input type="email" name="uemail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        <div id="emailHelp" class="form-text" required>We'll never share your email with anyone else.</div>
-      </div>
-      <div class="mb-3">
-        <label for="exampleInputPassword1" class="form-label" name="upass">Password</label>
-        <input type="password" name="upass" class="form-control" id="exampleInputPassword1" required>
-      </div>
-      <div class="mb-3 form-check">
-        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-        <label class="form-check-label" for="exampleCheck1" required>Check me out</label>
-      </div>
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <a href="/" class="btn btn-danger">Cancel</a>
-    </form>
+  </div>
 </div>
 {% endblock %}
